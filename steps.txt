@@ -1,0 +1,13 @@
+model
+
+if(usingSQL == true){
+open database connection
+save the data 
+get back the updated model
+}
+if(using textfile==true){
+open textfile
+generate id
+Save the data
+
+}
