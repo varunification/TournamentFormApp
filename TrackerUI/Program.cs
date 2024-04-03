@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using TournamentFormApp;
 
 namespace TrackerUI
@@ -10,10 +11,12 @@ namespace TrackerUI
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            
             ApplicationConfiguration.Initialize();
-            GlobalConfig.InitializeConnections(true, true);
+            IConfiguration config = new ConfigurationBuilder()
+           .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+           .Build();
+            GlobalConfig.InitializeConnections(DatabaseType.sql);
             Application.Run(new TournamentDashboardForm());
         }
     }

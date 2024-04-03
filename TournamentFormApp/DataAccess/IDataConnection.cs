@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TournamentFormApp.Models;
+﻿using TournamentFormApp.Models;
 
-namespace TournamentFormApp
+namespace TournamentFormApp.DataAccess
+
 {
     public interface IDataConnection
     {

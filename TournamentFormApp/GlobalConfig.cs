@@ -1,27 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
+using TournamentFormApp.DataAccess;
 
 namespace TournamentFormApp
 {
     public static class GlobalConfig
     {
-        public static List<IDataConnection> Connections {  get; private set; }
+        public static IDataConnection Connections { get; private set; }
 
-        public static void InitializeConnections(bool database=false, bool textFiles=false)
+        public static void InitializeConnections(DatabaseType db)
         {
-            if (database)
+            if (db==DatabaseType.sql)
             {
                 //do something database related
+                SQLConnector sql = new SQLConnector();
+                  Connections = sql;
             }
-            if (textFiles)
+            else if (db==DatabaseType.textFile)
             {
+                TextConnector text = new TextConnector();
+                Connections = text;
 
             }
 
 
         }
+
+        public static string cnnValue(string name)
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        }
+
+
+
     }
 }

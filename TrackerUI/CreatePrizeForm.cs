@@ -1,8 +1,5 @@
 ﻿using TournamentFormApp;
 using TournamentFormApp.Models;
-using TrackerLibrary;
-using TrackerLibrary.DataAccess;
-using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
@@ -27,7 +24,7 @@ namespace TrackerUI
 
 
 
-                GlobalConfig.Connection.CreatePrize(model);
+                GlobalConfig.Connections.Add(model);
 
                 callingForm.PrizeComplete(model);
 
@@ -87,5 +84,7 @@ namespace TrackerUI
 
             return output;
         }
+
+        
     }
 }
