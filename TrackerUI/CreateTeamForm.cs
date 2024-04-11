@@ -1,57 +1,100 @@
-﻿namespace TrackerUI
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.DirectoryServices.ActiveDirectory;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TournamentFormApp;
+using TournamentFormApp.Models;
+
+namespace TrackerUI
 {
     public partial class CreateTeamForm : Form
     {
-        private List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
+        private List<PersonModel> availableTeamMembers = GlobalConfig.Connections.GetPersonAll();
         private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
-        private ITeamRequester callingForm;
-
-        public CreateTeamForm(ITeamRequester caller)
+        public CreateTeamForm()
         {
             InitializeComponent();
-            callingForm = caller;
-            Wireuplists();
+            //CreateSampleData();
+            WireUpLists();
         }
-
-
 
         private void CreateSampleData()
         {
-            availableTeamMembers.Add(new PersonModel { FirstName = "ABC", LastName = "XYZ" });
-            availableTeamMembers.Add(new PersonModel { FirstName = "DEF", LastName = "PQR" });
+            availableTeamMembers.Add(new PersonModel { FirstName = "Varun", LastName = "Aggarwal" });
+            availableTeamMembers.Add(new PersonModel { FirstName = "Barun", LastName = "Adsfdfl" });
 
-            selectedTeamMembers.Add(new PersonModel { FirstName = "GHI", LastName = "MNO" });
-            selectedTeamMembers.Add(new PersonModel { FirstName = "LOP", LastName = "RST" });
+            selectedTeamMembers.Add(new PersonModel { FirstName = "joey", LastName = "hsdjkf" });
+            selectedTeamMembers.Add(new PersonModel { FirstName = "jok", LastName = "lkl" });
+        }
+
+        private void LoadListData()
+        {
 
         }
 
-        private void Wireuplists()
+        private void WireUpLists()
         {
             selectTeamMemberDropDown.DataSource = null;
-
             selectTeamMemberDropDown.DataSource = availableTeamMembers;
             selectTeamMemberDropDown.DisplayMember = "FullName";
-
             tournamentTeamMembersListBox.DataSource = null;
-
             tournamentTeamMembersListBox.DataSource = selectedTeamMembers;
             tournamentTeamMembersListBox.DisplayMember = "FullName";
 
+
+
         }
-        private void createMemberButton_Click(object sender, EventArgs e)
+
+        // Event handler for adding team member
+        private void AddTeamMemberButton_Click(object sender, EventArgs e)
+        {
+            // Add logic to add team member
+        }
+
+        // Event handler for deleting selected team member
+        private void DeleteSelectedTeamMemberButton_Click(object sender, EventArgs e)
+        {
+
+            PersonModel p = (PersonModel)tournamentTeamMembersListBox.SelectedItem;
+            if (p != null)
+            {
+                selectedTeamMembers.Remove(p);
+                availableTeamMembers.Add(p);
+                WireUpLists();
+            }
+
+
+        }
+
+        // Event handler for creating a new member
+        private void CreateMemberButton_Click(object sender, EventArgs e)
+        {
+            // Add logic to create a new member
+        }
+
+        // Event handler for creating a team
+        private void CreateTeamButton_Click(object sender, EventArgs e)
+        {
+            // Add logic to create a team
+        }
+
+        private void createMemberButton_Click_1(object sender, EventArgs e)
         {
             if (ValidateForm())
             {
-                PersonModel p = new PersonModel();
-                p.FirstName = firstNameValue.Text;
-                p.LastName = lastNameValue.Text;
-                p.EmailAddress = emailAddressValue.Text;
-                p.PhoneNumber = phoneValue.Text;
+                PersonModel model = new PersonModel(firstNameValue.Text, lastNameValue.Text, emailAddressValue.Text, phoneValue.Text);
 
-                GlobalConfig.Connection.CreatePerson(p);
+                GlobalConfig.Connections.CreatePerson(model);
 
-                selectedTeamMembers.Add(p);
-                Wireuplists();
+                availableTeamMembers.Add(model);
+
+                WireUpLists();
 
                 firstNameValue.Text = "";
                 lastNameValue.Text = "";
@@ -61,70 +104,51 @@
             }
             else
             {
-                MessageBox.Show("Fill in all fields");
+                MessageBox.Show("You need to fill in all the fields");
             }
-
         }
         private bool ValidateForm()
         {
-            if (firstNameValue.Text.Length == 0)
-            {
-                return false;
-            }
-            if (lastNameValue.Text.Length == 0)
-            {
-                return false;
-            }
-            if (emailAddressValue.Text.Length == 0)
-            {
-                return false;
-            }
-            if (phoneValue.Text.Length == 0)
-            {
-                return false;
-            }
 
+            if (firstNameValue.Text.Length == 0 || lastNameValue.Text.Length == 0 || emailAddressValue.Text.Length == 0 || phoneValue.Text.Length == 0)
+            {
+                return false;
+            }
             return true;
         }
 
-        private void addTeamMemberButton_Click(object sender, EventArgs e)
+        private void createTeamButton_Click_1(object sender, EventArgs e)
+        {
+            TeamModel t = new TeamModel();
+            t.TeamName = teamNameValue.Text;
+            t.TeamMembers =  selectedTeamMembers;
+
+            GlobalConfig.Connections.CreateTeam(t);
+
+            // TODO - If we ain't closing this form after creation reset the form
+        }
+
+
+
+        private void tournamentTeamMembersListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addTeamMemberButton_Click_1(object sender, EventArgs e)
         {
             PersonModel p = (PersonModel)selectTeamMemberDropDown.SelectedItem;
+
             if (p != null)
             {
                 availableTeamMembers.Remove(p);
                 selectedTeamMembers.Add(p);
 
-                Wireuplists();
+                WireUpLists();
             }
 
-        }
-
-        private void deleteSelectedTeamMemberButton_Click(object sender, EventArgs e)
-        {
-            PersonModel p = tournamentTeamMembersListBox.SelectedItem as PersonModel;
-            if (p != null)
-            {
-                selectedTeamMembers.Remove(p);
-                availableTeamMembers.Add(p);
-
-                Wireuplists();
-            }
-
-
-
-        }
-
-        private void createTeamButton_Click(object sender, EventArgs e)
-        {
-            TeamModel t = new TeamModel();
-            t.TeamName = teamNameValue.Text;
-            t.TeamMembers = selectedTeamMembers;
-
-            GlobalConfig.Connection.CreateTeam(t);
-
-            callingForm.TeamComplete(t);
-            this.Close();
+            //selectTeamMemberDropDown.Refresh();
+            //ournamentTeamMembersListBox.Refresh();
 
 
         }

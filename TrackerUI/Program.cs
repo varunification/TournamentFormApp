@@ -13,11 +13,9 @@ namespace TrackerUI
         {
             
             ApplicationConfiguration.Initialize();
-            IConfiguration config = new ConfigurationBuilder()
-           .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-           .Build();
-            GlobalConfig.InitializeConnections(DatabaseType.sql);
-            Application.Run(new TournamentDashboardForm());
+            
+            GlobalConfig.InitializeConnections(DatabaseType.textFile);
+            Application.Run(new CreateTeamForm());
         }
     }
 }

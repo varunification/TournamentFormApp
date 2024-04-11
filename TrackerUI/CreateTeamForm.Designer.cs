@@ -45,7 +45,7 @@
             firstNameValue = new TextBox();
             firstNameLabel = new Label();
             tournamentTeamMembersListBox = new ListBox();
-            deleteSelectedTeamMemberButton = new Button();
+            RemoveSelectedTeamMemberButton = new Button();
             createTeamButton = new Button();
             createTeamLabel = new Label();
             addNewMemberGroupBox.SuspendLayout();
@@ -64,7 +64,7 @@
             // teamNameValue
             // 
             teamNameValue.Location = new Point(24, 58);
-            teamNameValue.Margin = new Padding(2, 2, 2, 2);
+            teamNameValue.Margin = new Padding(2);
             teamNameValue.Name = "teamNameValue";
             teamNameValue.Size = new Size(204, 23);
             teamNameValue.TabIndex = 3;
@@ -82,10 +82,10 @@
             // selectTeamMemberDropDown
             // 
             selectTeamMemberDropDown.FormattingEnabled = true;
-            selectTeamMemberDropDown.Location = new Point(20, 101);
-            selectTeamMemberDropDown.Margin = new Padding(2, 2, 2, 2);
+            selectTeamMemberDropDown.Location = new Point(24, 101);
+            selectTeamMemberDropDown.Margin = new Padding(2);
             selectTeamMemberDropDown.Name = "selectTeamMemberDropDown";
-            selectTeamMemberDropDown.Size = new Size(208, 23);
+            selectTeamMemberDropDown.Size = new Size(204, 23);
             selectTeamMemberDropDown.TabIndex = 7;
             // 
             // addTeamMemberButton
@@ -95,14 +95,14 @@
             addTeamMemberButton.FlatAppearance.MouseOverBackColor = Color.White;
             addTeamMemberButton.FlatStyle = FlatStyle.Flat;
             addTeamMemberButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            addTeamMemberButton.Location = new Point(52, 125);
-            addTeamMemberButton.Margin = new Padding(2, 2, 2, 2);
+            addTeamMemberButton.Location = new Point(52, 132);
+            addTeamMemberButton.Margin = new Padding(2);
             addTeamMemberButton.Name = "addTeamMemberButton";
             addTeamMemberButton.Size = new Size(148, 29);
             addTeamMemberButton.TabIndex = 17;
             addTeamMemberButton.Text = "Add Member";
             addTeamMemberButton.UseVisualStyleBackColor = true;
-            addTeamMemberButton.Click += addTeamMemberButton_Click;
+            addTeamMemberButton.Click += addTeamMemberButton_Click_1;
             // 
             // addNewMemberGroupBox
             // 
@@ -117,10 +117,10 @@
             addNewMemberGroupBox.Controls.Add(firstNameValue);
             addNewMemberGroupBox.Controls.Add(firstNameLabel);
             addNewMemberGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            addNewMemberGroupBox.Location = new Point(24, 158);
-            addNewMemberGroupBox.Margin = new Padding(2, 2, 2, 2);
+            addNewMemberGroupBox.Location = new Point(24, 165);
+            addNewMemberGroupBox.Margin = new Padding(2);
             addNewMemberGroupBox.Name = "addNewMemberGroupBox";
-            addNewMemberGroupBox.Padding = new Padding(2, 2, 2, 2);
+            addNewMemberGroupBox.Padding = new Padding(2);
             addNewMemberGroupBox.Size = new Size(212, 166);
             addNewMemberGroupBox.TabIndex = 18;
             addNewMemberGroupBox.TabStop = false;
@@ -134,18 +134,18 @@
             createMemberButton.FlatStyle = FlatStyle.Flat;
             createMemberButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
             createMemberButton.Location = new Point(28, 121);
-            createMemberButton.Margin = new Padding(2, 2, 2, 2);
+            createMemberButton.Margin = new Padding(2);
             createMemberButton.Name = "createMemberButton";
             createMemberButton.Size = new Size(148, 36);
             createMemberButton.TabIndex = 18;
             createMemberButton.Text = "Create Member";
             createMemberButton.UseVisualStyleBackColor = true;
-            createMemberButton.Click += createMemberButton_Click;
+            createMemberButton.Click += createMemberButton_Click_1;
             // 
             // phoneValue
             // 
             phoneValue.Location = new Point(76, 90);
-            phoneValue.Margin = new Padding(2, 2, 2, 2);
+            phoneValue.Margin = new Padding(2);
             phoneValue.Name = "phoneValue";
             phoneValue.Size = new Size(128, 23);
             phoneValue.TabIndex = 17;
@@ -163,7 +163,7 @@
             // emailAddressValue
             // 
             emailAddressValue.Location = new Point(76, 68);
-            emailAddressValue.Margin = new Padding(2, 2, 2, 2);
+            emailAddressValue.Margin = new Padding(2);
             emailAddressValue.Name = "emailAddressValue";
             emailAddressValue.Size = new Size(128, 23);
             emailAddressValue.TabIndex = 15;
@@ -181,7 +181,7 @@
             // lastNameValue
             // 
             lastNameValue.Location = new Point(76, 46);
-            lastNameValue.Margin = new Padding(2, 2, 2, 2);
+            lastNameValue.Margin = new Padding(2);
             lastNameValue.Name = "lastNameValue";
             lastNameValue.Size = new Size(128, 23);
             lastNameValue.TabIndex = 13;
@@ -199,7 +199,7 @@
             // firstNameValue
             // 
             firstNameValue.Location = new Point(76, 23);
-            firstNameValue.Margin = new Padding(2, 2, 2, 2);
+            firstNameValue.Margin = new Padding(2);
             firstNameValue.Name = "firstNameValue";
             firstNameValue.Size = new Size(128, 23);
             firstNameValue.TabIndex = 11;
@@ -218,27 +218,28 @@
             // 
             tournamentTeamMembersListBox.FormattingEnabled = true;
             tournamentTeamMembersListBox.ItemHeight = 15;
-            tournamentTeamMembersListBox.Location = new Point(272, 56);
-            tournamentTeamMembersListBox.Margin = new Padding(2, 2, 2, 2);
+            tournamentTeamMembersListBox.Location = new Point(257, 56);
+            tournamentTeamMembersListBox.Margin = new Padding(2);
             tournamentTeamMembersListBox.Name = "tournamentTeamMembersListBox";
             tournamentTeamMembersListBox.Size = new Size(192, 259);
             tournamentTeamMembersListBox.TabIndex = 20;
+            tournamentTeamMembersListBox.SelectedIndexChanged += tournamentTeamMembersListBox_SelectedIndexChanged;
             // 
-            // deleteSelectedTeamMemberButton
+            // RemoveSelectedTeamMemberButton
             // 
-            deleteSelectedTeamMemberButton.FlatAppearance.BorderColor = Color.Silver;
-            deleteSelectedTeamMemberButton.FlatAppearance.MouseDownBackColor = Color.Gray;
-            deleteSelectedTeamMemberButton.FlatAppearance.MouseOverBackColor = Color.White;
-            deleteSelectedTeamMemberButton.FlatStyle = FlatStyle.Flat;
-            deleteSelectedTeamMemberButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            deleteSelectedTeamMemberButton.Location = new Point(467, 165);
-            deleteSelectedTeamMemberButton.Margin = new Padding(2, 2, 2, 2);
-            deleteSelectedTeamMemberButton.Name = "deleteSelectedTeamMemberButton";
-            deleteSelectedTeamMemberButton.Size = new Size(87, 44);
-            deleteSelectedTeamMemberButton.TabIndex = 21;
-            deleteSelectedTeamMemberButton.Text = "Delete Selected";
-            deleteSelectedTeamMemberButton.UseVisualStyleBackColor = true;
-            deleteSelectedTeamMemberButton.Click += deleteSelectedTeamMemberButton_Click;
+            RemoveSelectedTeamMemberButton.FlatAppearance.BorderColor = Color.Silver;
+            RemoveSelectedTeamMemberButton.FlatAppearance.MouseDownBackColor = Color.Gray;
+            RemoveSelectedTeamMemberButton.FlatAppearance.MouseOverBackColor = Color.White;
+            RemoveSelectedTeamMemberButton.FlatStyle = FlatStyle.Flat;
+            RemoveSelectedTeamMemberButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            RemoveSelectedTeamMemberButton.Location = new Point(467, 165);
+            RemoveSelectedTeamMemberButton.Margin = new Padding(2);
+            RemoveSelectedTeamMemberButton.Name = "RemoveSelectedTeamMemberButton";
+            RemoveSelectedTeamMemberButton.Size = new Size(87, 44);
+            RemoveSelectedTeamMemberButton.TabIndex = 21;
+            RemoveSelectedTeamMemberButton.Text = "Remove Selected";
+            RemoveSelectedTeamMemberButton.UseVisualStyleBackColor = true;
+            RemoveSelectedTeamMemberButton.Click += DeleteSelectedTeamMemberButton_Click;
             // 
             // createTeamButton
             // 
@@ -247,14 +248,14 @@
             createTeamButton.FlatAppearance.MouseOverBackColor = Color.White;
             createTeamButton.FlatStyle = FlatStyle.Flat;
             createTeamButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            createTeamButton.Location = new Point(145, 328);
-            createTeamButton.Margin = new Padding(2, 2, 2, 2);
+            createTeamButton.Location = new Point(145, 351);
+            createTeamButton.Margin = new Padding(2);
             createTeamButton.Name = "createTeamButton";
             createTeamButton.Size = new Size(268, 45);
             createTeamButton.TabIndex = 24;
             createTeamButton.Text = "Create Team";
             createTeamButton.UseVisualStyleBackColor = true;
-            createTeamButton.Click += createTeamButton_Click;
+            createTeamButton.Click += createTeamButton_Click_1;
             // 
             // createTeamLabel
             // 
@@ -276,7 +277,7 @@
             ClientSize = new Size(560, 428);
             Controls.Add(createTeamLabel);
             Controls.Add(createTeamButton);
-            Controls.Add(deleteSelectedTeamMemberButton);
+            Controls.Add(RemoveSelectedTeamMemberButton);
             Controls.Add(tournamentTeamMembersListBox);
             Controls.Add(addNewMemberGroupBox);
             Controls.Add(addTeamMemberButton);
@@ -284,7 +285,7 @@
             Controls.Add(selectTeamMemberLabel);
             Controls.Add(teamNameValue);
             Controls.Add(teamNameLabel);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "CreateTeamForm";
             Text = "Create Team";
             addNewMemberGroupBox.ResumeLayout(false);
@@ -312,7 +313,7 @@
         private Label firstNameLabel;
         private Button createMemberButton;
         private ListBox tournamentTeamMembersListBox;
-        private Button deleteSelectedTeamMemberButton;
+        private Button RemoveSelectedTeamMemberButton;
         private Button createTeamButton;
         private Label createTeamLabel;
     }

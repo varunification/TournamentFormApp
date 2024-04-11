@@ -113,7 +113,7 @@
             createNewTeamLink.TabIndex = 7;
             createNewTeamLink.TabStop = true;
             createNewTeamLink.Text = "Create New";
-            createNewTeamLink.LinkClicked += createNewTeamLink_LinkClicked;
+          
             // 
             // createPrizeButton
             // 
@@ -129,7 +129,7 @@
             createPrizeButton.TabIndex = 15;
             createPrizeButton.Text = "Create Prize";
             createPrizeButton.UseVisualStyleBackColor = true;
-            createPrizeButton.Click += createPrizeButton_Click;
+            
             // 
             // addTeamButton
             // 
@@ -145,7 +145,7 @@
             addTeamButton.TabIndex = 16;
             addTeamButton.Text = "Add Team";
             addTeamButton.UseVisualStyleBackColor = true;
-            addTeamButton.Click += addTeamButton_Click;
+            
             // 
             // teamPalyersLabel
             // 
@@ -181,7 +181,7 @@
             RemoveSelectedPlayersTeamButton.TabIndex = 19;
             RemoveSelectedPlayersTeamButton.Text = "Remove Selected";
             RemoveSelectedPlayersTeamButton.UseVisualStyleBackColor = true;
-            RemoveSelectedPlayersTeamButton.Click += RemoveSelectedPlayersTeamButton_Click;
+           
             // 
             // removeSelectedPrizeButton
             // 
@@ -197,7 +197,7 @@
             removeSelectedPrizeButton.TabIndex = 22;
             removeSelectedPrizeButton.Text = "Remove Selected";
             removeSelectedPrizeButton.UseVisualStyleBackColor = true;
-            removeSelectedPrizeButton.Click += removeSelectedPrizeButton_Click;
+           
             // 
             // prizesListBox
             // 
@@ -233,7 +233,7 @@
             createTournamentButton.TabIndex = 23;
             createTournamentButton.Text = "Create Tournament";
             createTournamentButton.UseVisualStyleBackColor = true;
-            createTournamentButton.Click += createTournamentButton_Click;
+           
             // 
             // createTournamentLabel
             // 

@@ -1,4 +1,6 @@
-﻿namespace TrackerUI
+﻿using TournamentFormApp.Models;
+
+namespace TrackerUI
 {
     public interface IPrizeRequester
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TournamentFormApp.Models;
@@ -53,5 +54,87 @@ namespace TournamentFormApp.DataAccess.TextHelpers
             }
             File.WriteAllLines(filename.FullFilePath(), lines);
         }
+        public static List<TeamModel> ConvertToTeamModels(this List<string> lines, string peopleFileName)
+        {
+            List<TeamModel> output = new List<TeamModel>();
+            List<PersonModel> people = peopleFileName.FullFilePath().LoadFile().ConvertToPersonModels();
+            foreach(var rr in lines)
+            {
+                string[] cols = rr.Split(',');
+                // id, team name
+                TeamModel t = new TeamModel();
+                t.id = int.Parse(cols[0]);
+                t.TeamName = cols[1];
+                string[] personIds = cols[2].Split("|");
+
+                foreach(string id in personIds)
+                {
+                    t.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First());
+                }
+                
+            }
+
+            return output;
+
+        }
+
+        public static void SaveToTeamsFile(this List<TeamModel> models, string filename)
+        {
+            List<string > lines = new List<string>();   
+            foreach (var team in models)
+            {
+                lines.Add($"{team.id},{team.TeamName},{ConvertPeopleListToString(team.TeamMembers)}");
+            }
+            File.WriteAllLines(filename.FullFilePath(), lines);
+        }
+
+        private static string ConvertPeopleListToString( List<PersonModel> people)
+        {
+            string output = "";
+            if (people.Count == 0)
+            {
+                return output;
+            }
+
+            foreach (var person in people) {
+                output += $"{person.Id}|";    
+            }
+            
+                output = output.Substring(0, output.Length - 1);
+            
+            return output;
+        }
+
+        public static List<PersonModel> ConvertToPersonModels(this List<string> lines)
+        {
+            List<PersonModel> personModels = new List<PersonModel>();
+            foreach (string line in lines)
+            {
+                string[] cols = line.Split(',');
+               PersonModel p = new PersonModel();
+                p.Id = int.Parse((string)cols[0]);
+                p.FirstName =(cols[1]);
+                p.LastName = cols[2];
+               p.EmailAddress = cols[3];
+
+                p.CellphoneNumber = cols[4];
+                personModels.Add(p);
+            }
+            return personModels;
+        }
+
+        public static void SaveToPeopleFile(this List<PersonModel> models, string filename) { 
+        
+        List<string> lines = new List<string>();
+            foreach(var p in models)
+            {
+                string temp = $"{p.Id},{p.FirstName},{p.LastName},{p.EmailAddress},{p.CellphoneNumber}";
+                lines.Add(temp);
+            }
+        
+        File.WriteAllLines(filename.FullFilePath(), lines);
+        }
+
+
     }
 }
