@@ -5,10 +5,15 @@ namespace TrackerUI
 {
     public partial class CreatePrizeForm : Form
     {
-
+        private readonly IPrizeRequester callingForm;
         public CreatePrizeForm()
         {
+                InitializeComponent();
+        }
+        public CreatePrizeForm(IPrizeRequester caller)
+        {
             InitializeComponent();
+            callingForm = caller;
         }
 
         private void createPrizeButton_Click(object sender, EventArgs e)
@@ -23,21 +28,24 @@ namespace TrackerUI
 
 
 
-                GlobalConfig.Connections.CreatePrize(model);
+                model = GlobalConfig.Connections.CreatePrize(model);
 
-
+                callingForm.PrizeComplete(model);
                 //this.Close();
 
 
-                placeNameValue.Text = "";
+                placeNameValue.Text = ""; 
                 placeNumberValue.Text = "";
                 prizeAmountValue.Text = "0";
                 prizePercentageValue.Text = "0";
+                this.Close();
+                
             }
             else
             {
                 MessageBox.Show("Invalid information Provided. Check and Try Again!!!");
             }
+            
         }
 
         private bool validateForm()

@@ -5,6 +5,7 @@ using System.Data;
 using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,11 +18,13 @@ namespace TrackerUI
     {
         private List<PersonModel> availableTeamMembers = GlobalConfig.Connections.GetPersonAll();
         private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
-        public CreateTeamForm()
+        private readonly ITeamRequester callingform;
+        public CreateTeamForm(ITeamRequester caller)
         {
             InitializeComponent();
             //CreateSampleData();
             WireUpLists();
+            this.callingform = caller;
         }
 
         private void CreateSampleData()
@@ -37,7 +40,6 @@ namespace TrackerUI
         {
 
         }
-
         private void WireUpLists()
         {
             selectTeamMemberDropDown.DataSource = null;
@@ -90,7 +92,7 @@ namespace TrackerUI
             {
                 PersonModel model = new PersonModel(firstNameValue.Text, lastNameValue.Text, emailAddressValue.Text, phoneValue.Text);
 
-                GlobalConfig.Connections.CreatePerson(model);
+                model = GlobalConfig.Connections.CreatePerson(model);
 
                 availableTeamMembers.Add(model);
 
@@ -100,7 +102,7 @@ namespace TrackerUI
                 lastNameValue.Text = "";
                 emailAddressValue.Text = "";
                 phoneValue.Text = "";
-
+               
             }
             else
             {
@@ -124,7 +126,8 @@ namespace TrackerUI
             t.TeamMembers =  selectedTeamMembers;
 
             GlobalConfig.Connections.CreateTeam(t);
-
+            this.callingform.teamComplete(t);
+            this.Close();
             // TODO - If we ain't closing this form after creation reset the form
         }
 

@@ -60,7 +60,7 @@
             // tournamentNameValue
             // 
             tournamentNameValue.Location = new Point(27, 76);
-            tournamentNameValue.Margin = new Padding(2, 2, 2, 2);
+            tournamentNameValue.Margin = new Padding(2);
             tournamentNameValue.Name = "tournamentNameValue";
             tournamentNameValue.Size = new Size(206, 23);
             tournamentNameValue.TabIndex = 2;
@@ -78,11 +78,12 @@
             // entryFeeValue
             // 
             entryFeeValue.Location = new Point(104, 106);
-            entryFeeValue.Margin = new Padding(2, 2, 2, 2);
+            entryFeeValue.Margin = new Padding(2);
             entryFeeValue.Name = "entryFeeValue";
             entryFeeValue.Size = new Size(127, 23);
             entryFeeValue.TabIndex = 4;
             entryFeeValue.Text = "0";
+            entryFeeValue.TextChanged += entryFeeValue_TextChanged;
             // 
             // selectTeamLabel
             // 
@@ -98,7 +99,7 @@
             // 
             selectTeamDropDown.FormattingEnabled = true;
             selectTeamDropDown.Location = new Point(104, 151);
-            selectTeamDropDown.Margin = new Padding(2, 2, 2, 2);
+            selectTeamDropDown.Margin = new Padding(2);
             selectTeamDropDown.Name = "selectTeamDropDown";
             selectTeamDropDown.Size = new Size(129, 23);
             selectTeamDropDown.TabIndex = 6;
@@ -113,7 +114,7 @@
             createNewTeamLink.TabIndex = 7;
             createNewTeamLink.TabStop = true;
             createNewTeamLink.Text = "Create New";
-          
+            createNewTeamLink.LinkClicked += createNewTeamLink_LinkClicked_1;
             // 
             // createPrizeButton
             // 
@@ -123,13 +124,13 @@
             createPrizeButton.FlatStyle = FlatStyle.Flat;
             createPrizeButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
             createPrizeButton.Location = new Point(72, 223);
-            createPrizeButton.Margin = new Padding(2, 2, 2, 2);
+            createPrizeButton.Margin = new Padding(2);
             createPrizeButton.Name = "createPrizeButton";
             createPrizeButton.Size = new Size(115, 27);
             createPrizeButton.TabIndex = 15;
             createPrizeButton.Text = "Create Prize";
             createPrizeButton.UseVisualStyleBackColor = true;
-            
+            createPrizeButton.Click += createPrizeButton_Click;
             // 
             // addTeamButton
             // 
@@ -139,13 +140,13 @@
             addTeamButton.FlatStyle = FlatStyle.Flat;
             addTeamButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
             addTeamButton.Location = new Point(74, 187);
-            addTeamButton.Margin = new Padding(2, 2, 2, 2);
+            addTeamButton.Margin = new Padding(2);
             addTeamButton.Name = "addTeamButton";
             addTeamButton.Size = new Size(113, 32);
             addTeamButton.TabIndex = 16;
             addTeamButton.Text = "Add Team";
             addTeamButton.UseVisualStyleBackColor = true;
-            
+            addTeamButton.Click += addTeamButton_Click;
             // 
             // teamPalyersLabel
             // 
@@ -162,7 +163,7 @@
             tournamentTeamListBox.FormattingEnabled = true;
             tournamentTeamListBox.ItemHeight = 15;
             tournamentTeamListBox.Location = new Point(249, 62);
-            tournamentTeamListBox.Margin = new Padding(2, 2, 2, 2);
+            tournamentTeamListBox.Margin = new Padding(2);
             tournamentTeamListBox.Name = "tournamentTeamListBox";
             tournamentTeamListBox.Size = new Size(180, 94);
             tournamentTeamListBox.TabIndex = 18;
@@ -175,13 +176,13 @@
             RemoveSelectedPlayersTeamButton.FlatStyle = FlatStyle.Flat;
             RemoveSelectedPlayersTeamButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
             RemoveSelectedPlayersTeamButton.Location = new Point(433, 91);
-            RemoveSelectedPlayersTeamButton.Margin = new Padding(2, 2, 2, 2);
+            RemoveSelectedPlayersTeamButton.Margin = new Padding(2);
             RemoveSelectedPlayersTeamButton.Name = "RemoveSelectedPlayersTeamButton";
             RemoveSelectedPlayersTeamButton.Size = new Size(87, 44);
             RemoveSelectedPlayersTeamButton.TabIndex = 19;
             RemoveSelectedPlayersTeamButton.Text = "Remove Selected";
             RemoveSelectedPlayersTeamButton.UseVisualStyleBackColor = true;
-           
+            RemoveSelectedPlayersTeamButton.Click += RemoveSelectedPlayersTeamButton_Click_1;
             // 
             // removeSelectedPrizeButton
             // 
@@ -191,20 +192,20 @@
             removeSelectedPrizeButton.FlatStyle = FlatStyle.Flat;
             removeSelectedPrizeButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
             removeSelectedPrizeButton.Location = new Point(433, 205);
-            removeSelectedPrizeButton.Margin = new Padding(2, 2, 2, 2);
+            removeSelectedPrizeButton.Margin = new Padding(2);
             removeSelectedPrizeButton.Name = "removeSelectedPrizeButton";
             removeSelectedPrizeButton.Size = new Size(87, 44);
             removeSelectedPrizeButton.TabIndex = 22;
             removeSelectedPrizeButton.Text = "Remove Selected";
             removeSelectedPrizeButton.UseVisualStyleBackColor = true;
-           
+            removeSelectedPrizeButton.Click += removeSelectedPrizeButton_Click_1;
             // 
             // prizesListBox
             // 
             prizesListBox.FormattingEnabled = true;
             prizesListBox.ItemHeight = 15;
             prizesListBox.Location = new Point(249, 181);
-            prizesListBox.Margin = new Padding(2, 2, 2, 2);
+            prizesListBox.Margin = new Padding(2);
             prizesListBox.Name = "prizesListBox";
             prizesListBox.Size = new Size(180, 94);
             prizesListBox.TabIndex = 21;
@@ -227,13 +228,13 @@
             createTournamentButton.FlatStyle = FlatStyle.Flat;
             createTournamentButton.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point);
             createTournamentButton.Location = new Point(160, 293);
-            createTournamentButton.Margin = new Padding(2, 2, 2, 2);
+            createTournamentButton.Margin = new Padding(2);
             createTournamentButton.Name = "createTournamentButton";
             createTournamentButton.Size = new Size(268, 27);
             createTournamentButton.TabIndex = 23;
             createTournamentButton.Text = "Create Tournament";
             createTournamentButton.UseVisualStyleBackColor = true;
-           
+            createTournamentButton.Click += createTournamentButton_Click;
             // 
             // createTournamentLabel
             // 
@@ -252,7 +253,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(560, 331);
+            ClientSize = new Size(592, 367);
             Controls.Add(createTournamentLabel);
             Controls.Add(createTournamentButton);
             Controls.Add(removeSelectedPrizeButton);
@@ -270,7 +271,7 @@
             Controls.Add(entryFeeLabel);
             Controls.Add(tournamentNameValue);
             Controls.Add(tournamentNameLabel);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "CreateTournamentForm";
             Text = "Create Tournament";
             ResumeLayout(false);

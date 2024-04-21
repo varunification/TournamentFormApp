@@ -7,8 +7,9 @@
         /// <summary>
         ///  represents one team in the matchup.lp
         /// </summary>
+        public int Id { get; set; }  
         public TeamModel TeamCompeting { get; set; }
         public double score { get; set; }
-        public double ParentMatchup { get; set; }
+        public MatchupModel ParentMatchup { get; set; }
     }
 }

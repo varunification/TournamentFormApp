@@ -10,5 +10,8 @@ namespace TournamentFormApp.DataAccess
         PersonModel CreatePerson(PersonModel model);
         List<PersonModel> GetPersonAll();
         TeamModel CreateTeam(TeamModel model);
+        List<TeamModel> GetTeamAll();
+        void createTournament(TournamentModel model);    
+        
     }
 }

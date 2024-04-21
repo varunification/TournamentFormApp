@@ -9,6 +9,7 @@ namespace TournamentFormApp.DataAccess
         private const string PrizesFile = "PrizeModels.csv";
         private const string peopleFile = "PersonModels.csv";
         private const string teamFile = "TeamModels.csv";
+        private const string tournamentFile = "TournamentModels.csv";
 
         public PersonModel CreatePerson(PersonModel model)
         {
@@ -53,12 +54,31 @@ namespace TournamentFormApp.DataAccess
 
         }
 
+        public void createTournament(TournamentModel model)
+        {
+            List<TournamentModel> tournaments = tournamentFile.FullFilePath().LoadFile().convertToTournamentModels(teamFile, peopleFile, PrizesFile);
+            int currentId = 1;
+            if(tournaments.Count > 0)
+            {
+                currentId = tournaments.OrderByDescending(x=>x.Id).First().Id + 1;
+            }
+            model.Id = currentId;
+
+            tournaments.Add(model);
+            tournaments.SaveToTournamentFile();
+        }
+
         public List<PersonModel> GetPersonAll()
         {
            return peopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
 
         }
 
-        
+        public List<TeamModel> GetTeamAll()
+        {
+            return teamFile.FullFilePath().LoadFile().ConvertToTeamModels(peopleFile);
+        }
+
+     
     }
 }
